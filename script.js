@@ -240,25 +240,25 @@ function SetVisibility(isVisible, updateCurrentState = true) {
 //////////////////////////////
 // RESPONSIVE ADJUSTMENT	 //
 //////////////////////////////
-window.addEventListener("resize", onResize);
-document.addEventListener("DOMContentLoaded", onResize);
-function onResize() {
-	const outer = document.getElementById("mainContainer");
-	if (!outer) return;
-	// Define the “design width” / “design height” — the ideal size
-	const designWidth = 500;	// adjust to your base size
-	const designHeight = outer.offsetHeight;	// or a known base design height
-	const windowW = window.innerWidth;
-	const windowH = window.innerHeight;
-	// Compute scale factors
-	const scaleX = windowW / designWidth;
-	const scaleY = windowH / designHeight;
-	// Use the smaller scale to preserve aspect ratio
-	const scale = Math.min(scaleX, scaleY, 2);
-	console.log(scale);
-	// Apply scaling + centering transform
-	outer.style.transform = `scale(${scale})`;
-}
+// window.addEventListener("resize", onResize);
+// document.addEventListener("DOMContentLoaded", onResize);
+// function onResize() {
+// 	const outer = document.getElementById("mainContainer");
+// 	if (!outer) return;
+// 	// Define the “design width” / “design height” — the ideal size
+// 	const designWidth = 500;	// adjust to your base size
+// 	const designHeight = outer.offsetHeight;	// or a known base design height
+// 	const windowW = window.innerWidth;
+// 	const windowH = window.innerHeight;
+// 	// Compute scale factors
+// 	const scaleX = windowW / designWidth;
+// 	const scaleY = windowH / designHeight;
+// 	// Use the smaller scale to preserve aspect ratio
+// 	const scale = Math.min(scaleX, scaleY, 2);
+// 	console.log(scale);
+// 	// Apply scaling + centering transform
+// 	outer.style.transform = `scale(${scale})`;
+// }
 
 //////////////////////////////
 // OPTIONAL: HIDE ALBUM ART //
