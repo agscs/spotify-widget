@@ -251,15 +251,12 @@ function SetVisibility(isVisible, updateCurrentState = true) {
 
 window.addEventListener("resize", handleResize);
 handleResize(); // Run on load
-
 function handleResize() {
 	const outer = document.getElementById("mainContainer");
 	if (!outer) return;
-
 	// Compute safe scale (never exceed 1)
 	const baseWidth = 350; // your widget’s intended max width
-	const scale = Math.min(window.innerWidth / baseWidth, 3);
-
+	const scale = Math.min(window.innerWidth / baseWidth, 2);
 	console.log(scale);
 	// Apply transform scaling + keep centered alignment
 	outer.style.transform = `scale(${scale})`;
