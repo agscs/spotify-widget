@@ -27,3 +27,29 @@ body {
 #albumArtBox {
 	height: 100%;
 }
+
+
+
+
+/* Default (Design 1) */
+/* body.design-1 #mainContainer {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	font-family: "Comic Sans MS";
+} */
+
+/* Design 2 - Minimalistic */
+body.design-2 #mainContainer {
+	background: linear-gradient(145deg, #1db954, #191414);
+	color: #fff;
+	border-radius: 15px;
+	font-family: "Inter", sans-serif;
+}
+
+/* Design 3 - Compact/Flat */
+body.design-3 #mainContainer {
+	background: transparent;
+	color: #ccc;
+	text-shadow: none;
+	font-family: "Roboto Mono", monospace;
+}

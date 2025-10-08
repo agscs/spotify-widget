@@ -12,11 +12,15 @@ let access_token = "";
 
 const visibilityDuration = urlParams.get("duration") || 0;
 const hideAlbumArt = urlParams.has("hideAlbumArt");
+const design = parseInt(urlParams.get('design')) || 1;
+
 
 let currentState = false;
 let currentSongUri = "";
 
-
+if (![1, 2, 3].includes(design)) {
+	console.warn(`Unknown design "${design}", using default.`);
+}
 
 /////////////////
 // SPOTIFY API //
@@ -28,9 +32,9 @@ async function RefreshAccessToken() {
 	console.debug(`Client Secret: ${client_secret}`);
 	console.debug(`Refresh Token: ${refresh_token}`);
 
-    let body = "grant_type=refresh_token";
-    body += "&refresh_token=" + refresh_token;
-    body += "&client_id=" + client_id;
+	let body = "grant_type=refresh_token";
+	body += "&refresh_token=" + refresh_token;
+	body += "&client_id=" + client_id;
 
 	const response = await fetch("https://accounts.spotify.com/api/token", {
 		method: "POST",
