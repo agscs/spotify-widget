@@ -1,168 +1,134 @@
-/* Remove default shadow and transparent body */
+/* General page setup */
 body {
-  background: transparent;
-  margin: 0;
+  background-color: rgba(0, 0, 0, 0);
+  margin: 0 auto;
   overflow: hidden;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #fff;
 }
 
-/* Completely override any shadows from base CSS */
+/* Main container — clean layout, no shadow */
 #mainContainer {
-  filter: none !important;
-  box-shadow: none !important;
-}
-
-/* Modern Spotify UI design */
-.spotify-widget {
-  font-family: 'Inter', sans-serif;
-  color: #EFEFEF;
-  background-color: #121212;
-  border: 1px solid #1F1F1F;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 320px;
-  backdrop-filter: blur(8px);
-}
-
-/* Header with album art */
-.spotify-widget .sw-header {
   display: flex;
   align-items: center;
-  padding: 12px;
-  background: rgba(30, 30, 30, 0.9);
+  justify-content: flex-start;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 16px;
+  width: 340px;
+  height: 100px;
+  filter: none !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(10px);
 }
 
-.spotify-widget .sw-header .cover {
-  flex-shrink: 0;
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
+/* Album art box */
+#albumArtBox {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
   overflow: hidden;
-  margin-right: 12px;
+  flex-shrink: 0;
 }
 
-.spotify-widget .sw-header .cover img {
+#albumArt {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  border-radius: 8px;
 }
 
-/* Text information */
-.spotify-widget .sw-header .info {
-  flex: 1;
-}
-
-.spotify-widget .sw-header .info .title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #FFF;
-  margin-bottom: 3px;
-}
-
-.spotify-widget .sw-header .info .artist {
-  font-size: 0.875rem;
-  color: #B3B3B3;
-}
-
-/* Controls area */
-.spotify-widget .sw-controls {
+/* Info section */
+#songInfoBox {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 10px 0;
-  background-color: #181818;
+  margin-left: 14px;
+  width: calc(100% - 100px);
 }
 
-.spotify-widget .sw-controls button {
-  background: none;
-  border: none;
-  color: #EFEFEF;
-  padding: 6px 10px;
-  margin: 0 8px;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.1s ease;
+#songLabel {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
 }
 
-.spotify-widget .sw-controls button:hover {
-  color: #1DB954;
-  transform: scale(1.05);
+#artistLabel {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 3px;
 }
 
-/* Progress bar */
-.spotify-widget .sw-progress {
-  position: relative;
+/* Progress bar container */
+#progressBg {
+  width: 100%;
   height: 4px;
-  background: #404040;
-  margin: 0 14px;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
+  margin-top: 10px;
 }
 
-.spotify-widget .sw-progress .progress-filled {
+#progressBar {
   height: 100%;
-  background-color: #1DB954;
-  width: 0%;
+  background-color: #1db954; /* Spotify green */
   border-radius: 2px;
+  width: 0%; /* JS dynamically updates this */
+  transition: width 0.4s ease;
 }
 
-/* Time text */
-.spotify-widget .sw-time {
+/* Time text under the progress bar */
+#times {
   display: flex;
   justify-content: space-between;
-  padding: 4px 14px 10px 14px;
   font-size: 0.75rem;
-  color: #B3B3B3;
+  color: #a0a0a0;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
-/* Playlist */
-.spotify-widget .sw-playlist {
-  max-height: 240px;
-  overflow-y: auto;
-  background-color: #121212;
-  border-top: 1px solid #282828;
-  box-shadow: none !important;
+/* Progress animation */
+@keyframes progressPulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }
 
-.spotify-widget .sw-playlist .sw-track {
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  transition: background 0.2s ease;
+#progressBar.playing {
+  animation: progressPulse 1.5s ease-in-out infinite;
 }
 
-.spotify-widget .sw-playlist .sw-track:hover {
-  background-color: #1E1E1E;
-}
-
-.spotify-widget .sw-playlist .sw-track .track-index {
-  width: 24px;
-  text-align: right;
-  margin-right: 12px;
-  color: #B3B3B3;
-}
-
-.spotify-widget .sw-playlist .sw-track .track-title {
-  font-size: 0.9rem;
-  color: #FFF;
-}
-
-.spotify-widget .sw-playlist .sw-track .track-artist {
-  font-size: 0.8rem;
-  color: #8C8C8C;
-}
-
-/* Scrollbar (minimal style) */
-.spotify-widget .sw-playlist::-webkit-scrollbar {
-  width: 5px;
-}
-
-.spotify-widget .sw-playlist::-webkit-scrollbar-thumb {
-  background-color: #333;
-  border-radius: 3px;
-}
-
-/* Responsive handling */
+/* Responsive tweak for OBS/browser overlays */
 @media (max-width: 400px) {
-  .spotify-widget {
+  #mainContainer {
     width: 100%;
-    border-radius: 0;
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #albumArtBox {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+
+  #songInfoBox {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  #times {
+    justify-content: center;
+    gap: 10px;
   }
 }
