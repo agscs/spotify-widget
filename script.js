@@ -190,10 +190,6 @@ function UpdatePlayer(data) {
 	document.getElementById("progressTime").innerHTML = progressTime;
 	document.getElementById("timeRemaining").innerHTML = `-${timeRemaining}`;
 
-	setTimeout(() => {
-		document.getElementById("albumArtBack").src = albumArt;
-		document.getElementById("backgroundImageBack").src = albumArt;
-	}, 1000);
 }
 
 ////////////////////////
@@ -235,7 +231,7 @@ function SetVisibility(isVisible, updateCurrentState = true) {
 	if (!mainContainer) return;
 
 	mainContainer.style.opacity = isVisible ? 1 : 0;
-	mainContainer.style.transform = isVisible ? "scale(1)" : "scale(0.98)";
+	// mainContainer.style.transform = isVisible ? "scale(1)" : "scale(0.98)";
 	mainContainer.style.transition = "opacity 0.4s ease, transform 0.4s ease";
 
 	if (updateCurrentState) currentState = isVisible;
@@ -245,13 +241,29 @@ function SetVisibility(isVisible, updateCurrentState = true) {
 // RESPONSIVE ADJUSTMENT	 //
 //////////////////////////////
 
-window.addEventListener("resize", () => {
-	const outer = document.getElementById('mainContainer');
-	if (!outer) return;
-	const scale = Math.min(window.innerWidth / 600, 1);
-	outer.style.transform = `scale(${scale})`;
-});
+// window.addEventListener("resize", () => {
+// 	const outer = document.getElementById('mainContainer');
+// 	if (!outer) return;
+// 	const scale = Math.min(window.innerWidth / 600, 2);
+// 	console.log(scale);
+// 	outer.style.transform = `scale(${scale})`;
+// });
 
+window.addEventListener("resize", handleResize);
+handleResize(); // Run on load
+
+function handleResize() {
+	const outer = document.getElementById("mainContainer");
+	if (!outer) return;
+
+	// Compute safe scale (never exceed 1)
+	const baseWidth = 350; // your widget’s intended max width
+	const scale = Math.min(window.innerWidth / baseWidth, 3);
+
+	console.log(scale);
+	// Apply transform scaling + keep centered alignment
+	outer.style.transform = `scale(${scale})`;
+}
 //////////////////////////////
 // OPTIONAL: HIDE ALBUM ART //
 //////////////////////////////
