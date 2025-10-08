@@ -240,27 +240,26 @@ function SetVisibility(isVisible, updateCurrentState = true) {
 //////////////////////////////
 // RESPONSIVE ADJUSTMENT	 //
 //////////////////////////////
-
-// window.addEventListener("resize", () => {
-// 	const outer = document.getElementById('mainContainer');
-// 	if (!outer) return;
-// 	const scale = Math.min(window.innerWidth / 600, 2);
-// 	console.log(scale);
-// 	outer.style.transform = `scale(${scale})`;
-// });
-
-window.addEventListener("resize", handleResize);
-handleResize(); // Run on load
-function handleResize() {
+window.addEventListener("resize", onResize);
+document.addEventListener("DOMContentLoaded", onResize);
+function onResize() {
 	const outer = document.getElementById("mainContainer");
 	if (!outer) return;
-	// Compute safe scale (never exceed 1)
-	const baseWidth = 350; // your widget’s intended max width
-	const scale = Math.min(window.innerWidth / baseWidth, 2);
+	// Define the “design width” / “design height” — the ideal size
+	const designWidth = 500;	// adjust to your base size
+	const designHeight = outer.offsetHeight;	// or a known base design height
+	const windowW = window.innerWidth;
+	const windowH = window.innerHeight;
+	// Compute scale factors
+	const scaleX = windowW / designWidth;
+	const scaleY = windowH / designHeight;
+	// Use the smaller scale to preserve aspect ratio
+	const scale = Math.min(scaleX, scaleY, 2);
 	console.log(scale);
-	// Apply transform scaling + keep centered alignment
+	// Apply scaling + centering transform
 	outer.style.transform = `scale(${scale})`;
 }
+
 //////////////////////////////
 // OPTIONAL: HIDE ALBUM ART //
 //////////////////////////////
