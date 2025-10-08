@@ -23,3 +23,7 @@ body {
 	height: 100%;
 	width: calc(100% - var(--album-art-size));
 }
+
+#albumArtBox {
+	height: 100%;
+}
