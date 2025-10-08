@@ -231,8 +231,8 @@ function SetVisibility(isVisible, updateCurrentState = true) {
 	if (!mainContainer) return;
 
 	mainContainer.style.opacity = isVisible ? 1 : 0;
-	// mainContainer.style.transform = isVisible ? "scale(1)" : "scale(0.98)";
-	mainContainer.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+	mainContainer.style.transform = isVisible ? "scale(3)" : "scale(1)";
+	// mainContainer.style.transition = "opacity 0.4s ease, transform 0.4s ease";
 
 	if (updateCurrentState) currentState = isVisible;
 }
