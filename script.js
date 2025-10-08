@@ -14,6 +14,8 @@ const visibilityDuration = urlParams.get("duration") || 0;
 const hideAlbumArt = urlParams.has("hideAlbumArt");
 const design = parseInt(urlParams.get('design')) || 1;
 
+// Add the design class to the body
+document.body.classList.add(`design-${design}`);
 
 let currentState = false;
 let currentSongUri = "";
