@@ -1,5 +1,5 @@
 /* -------------------------
-	 DESIGN 1 – Default / Classic Horizontal
+	DESIGN 1 – Default / Classic Horizontal
 ------------------------- */
 body.design-1 #mainContainer {
 	flex-direction: row;
@@ -8,7 +8,7 @@ body.design-1 #mainContainer {
 }
 
 /* -------------------------
-	 DESIGN 2 – Spotify Vertical Theme
+	DESIGN 2 – Spotify Vertical Theme
 ------------------------- */
 body.design-2 #mainContainer {
 	flex-direction: column;
@@ -56,7 +56,7 @@ body.design-2 #progressBar {
 }
 
 /* -------------------------
-	 DESIGN 3 – Minimal Overlay
+	DESIGN 3 – Minimal Overlay
 ------------------------- */
 body.design-3 #mainContainer {
 	flex-direction: row;
