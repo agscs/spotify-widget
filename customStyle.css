@@ -14,7 +14,7 @@ body {
 	height: 100px;
 	box-shadow: none !important;
 	backdrop-filter: blur(10px);
-	filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 1));
+	filter: drop-shadow(0 5px 5px rgba(0, 0, 0, .5));
 	margin: 5px;
 }
 
@@ -29,27 +29,93 @@ body {
 }
 
 
+/* ===== SPOTIFY THEMED (2) — VERTICAL ===== */
+body.design-2 {
+	background: transparent;
+}
 
-
-/* Default (Design 1) */
-/* body.design-1 #mainContainer {
-	background-color: rgba(0, 0, 0, 0.5);
-	color: white;
-	font-family: "Comic Sans MS";
-} */
-
-/* Design 2 - Minimalistic */
 body.design-2 #mainContainer {
-	background: linear-gradient(145deg, #1db954, #191414);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	background: linear-gradient(180deg, #191414 0%, #1db954 100%);
 	color: #fff;
-	border-radius: 15px;
-	font-family: "Inter", sans-serif;
+	width: 220px;
+	border-radius: 16px;
+	padding: 20px 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+body.design-2 #albumArtBox img {
+	width: 180px;
+	height: 180px;
+	border-radius: 12px;
+	margin-bottom: 15px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.design-2 #songLabel {
+	font-weight: 700;
+	font-size: 16px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
+body.design-2 #artistLabel {
+	font-weight: 400;
+	font-size: 14px;
+	color: #b3b3b3;
+	margin-bottom: 10px;
+}
+
+body.design-2 #progressContainer {
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+	font-size: 12px;
+	color: #b3b3b3;
+}
+
+body.design-2 #progressBg {
+	flex: 1;
+	height: 5px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+body.design-2 #progressBar {
+	width: 40%;
+	height: 100%;
+	background: #1db954;
 }
 
 /* Design 3 - Compact/Flat */
+/* ===== MINIMAL OVERLAY (3) ===== */
 body.design-3 #mainContainer {
+	display: flex;
+	align-items: center;
 	background: transparent;
 	color: #ccc;
-	text-shadow: none;
 	font-family: "Roboto Mono", monospace;
+}
+
+body.design-3 #albumArtBox img {
+	width: 50px;
+	height: 50px;
+	border-radius: 8px;
+	margin-right: 8px;
+}
+
+body.design-3 #songInfoBox {
+	line-height: 1.2;
+}
+
+body.design-3 #progressBg {
+	background: #555;
+	height: 4px;
+	border-radius: 2px;
 }
