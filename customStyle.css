@@ -1,121 +1,94 @@
-body {
-	background-color: rgba(0, 0, 0, 0);
-	margin: 0 auto;
-	overflow: hidden;
-	font-family: "Inter", "Segoe UI", Roboto, sans-serif;
-	color: #fff;
-}
-
-#mainContainer {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	width: 340px;
-	height: 100px;
-	box-shadow: none !important;
+/* -------------------------
+	 DESIGN 1 – Default / Classic Horizontal
+------------------------- */
+body.design-1 #mainContainer {
+	flex-direction: row;
+	background: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(10px);
-	filter: drop-shadow(0 5px 5px rgba(0, 0, 0, .5));
-	margin: 5px;
 }
 
-#songInfoBox {
-	flex: 0 1 auto;
-	height: 100%;
-	width: calc(100% - var(--album-art-size));
-}
-
-#albumArtBox {
-	height: 100%;
-}
-
-
-/* ===== SPOTIFY THEMED (2) — VERTICAL ===== */
-body.design-2 {
-	background: transparent;
-}
-
+/* -------------------------
+	 DESIGN 2 – Spotify Vertical Theme
+------------------------- */
 body.design-2 #mainContainer {
-	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
+	width: 240px;
+	padding: 20px;
 	background: linear-gradient(180deg, #191414 0%, #1db954 100%);
-	color: #fff;
-	width: 220px;
 	border-radius: 16px;
-	padding: 20px 10px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-body.design-2 #albumArtBox img {
+body.design-2 #songInfoBox {
+	width: 100%;
+}
+
+body.design-2 #albumArtBox {
 	width: 180px;
 	height: 180px;
-	border-radius: 12px;
 	margin-bottom: 15px;
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 body.design-2 #songLabel {
-	font-weight: 700;
 	font-size: 16px;
+	font-weight: 700;
 	color: #fff;
-	margin-bottom: 5px;
 }
 
 body.design-2 #artistLabel {
-	font-weight: 400;
 	font-size: 14px;
-	color: #b3b3b3;
 	margin-bottom: 10px;
 }
 
 body.design-2 #progressContainer {
-	width: 90%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 6px;
-	font-size: 12px;
-	color: #b3b3b3;
+	margin-top: 10px;
 }
 
 body.design-2 #progressBg {
-	flex: 1;
-	height: 5px;
 	background: rgba(255, 255, 255, 0.2);
-	border-radius: 3px;
-	overflow: hidden;
 }
 
 body.design-2 #progressBar {
-	width: 40%;
-	height: 100%;
-	background: #1db954;
+	background: #FFF;
 }
 
-/* Design 3 - Compact/Flat */
-/* ===== MINIMAL OVERLAY (3) ===== */
+/* -------------------------
+	 DESIGN 3 – Minimal Overlay
+------------------------- */
 body.design-3 #mainContainer {
-	display: flex;
+	flex-direction: row;
 	align-items: center;
 	background: transparent;
-	color: #ccc;
-	font-family: "Roboto Mono", monospace;
+	filter: none;
+	text-shadow: none;
+	box-shadow: none;
 }
 
-body.design-3 #albumArtBox img {
+body.design-3 #albumArtBox {
 	width: 50px;
 	height: 50px;
-	border-radius: 8px;
 	margin-right: 8px;
 }
 
-body.design-3 #songInfoBox {
-	line-height: 1.2;
+body.design-3 #songLabel {
+	font-size: 16px;
+	font-weight: 600;
+	color: #ccc;
+}
+
+body.design-3 #artistLabel {
+	font-size: 12px;
+	color: #888;
 }
 
 body.design-3 #progressBg {
-	background: #555;
-	height: 4px;
+	background: #444;
 	border-radius: 2px;
+}
+
+body.design-3 #progressBar {
+	background: #ccc;
 }

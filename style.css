@@ -1,192 +1,209 @@
+/* =========================================================
+   BASE VARIABLES & GLOBAL ELEMENTS
+========================================================= */
 * {
-	--corner-radius: 10px;
-	--album-art-size: 100px;
+  --corner-radius: 10px;
+  --album-art-size: 100px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
+/* =========================================================
+   STATUS / CONNECTION MESSAGE
+========================================================= */
 #statusContainer {
-	font-weight: 500;
-	font-size: 30px;
-	text-align: center;
-	background-color: #D12025;
-	color: white;
-	padding: 10px;
-	border-radius: 10px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  position: fixed;
+  inset: 0; /* full viewport overlay */
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+
+  font-weight: 600;
+  font-size: 24px;
+  color: #ffffff;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
 }
 
+/* When active (JS toggles this) */
+#statusContainer.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Spinner style */
+#statusContainer::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #1db954; /* Spotify green */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+#statusContainer span {
+  animation: pulseText 1.6s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* =========================================================
+   MAIN LAYOUT STRUCTURE
+========================================================= */
 #mainContainer {
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-	display: flex;
-	position: absolute;
-	height: var(--album-art-size);
-	margin: 20px;
-	filter: drop-shadow(15px 15px 7px rgba(0, 0, 0, 1));
-	width: 100%;
-	max-width: 500px;
-	bottom: calc(50% - 20px);
-	left: 50%;
-	opacity: 0;
-	transition: all 0.5s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 350px;
+  padding: 10px;
+  border-radius: var(--corner-radius);
+  transition: all 0.5s ease;
+	/* filter: drop-shadow(15px 15px 7px rgba(0, 0, 0, 1)); */
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
 }
 
+/* =========================================================
+   ALBUM ART
+========================================================= */
 #albumArtBox {
-	background: rgba(0, 0, 0, 0.5);
-	position: relative;
-	border-radius: var(--corner-radius);
-	overflow: hidden;
-	margin: 0px 8px 0px 0px;
-	object-fit: cover;
-	width: var(--album-art-size);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--corner-radius);
+  overflow: hidden;
+  flex-shrink: 0;
+  width: var(--album-art-size);
+  height: var(--album-art-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#albumArt {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0%;
-	object-fit: cover;
-}
-#albumArtBack {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+#albumArt, #albumArtBack {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-#albumArtBox img {
-	/* width: 100%;
-	height: 100%;
-	object-fit: cover; */
-}
-
+/* =========================================================
+   SONG INFO STRUCTURE
+========================================================= */
 #songInfoBox {
-	position: relative;
-	color: white;
-	width: calc(100% - 125px);
-	display: flex;
-	flex-direction: column;
-	flex: 0 1 auto;
-	justify-content: center;
-	z-index: 1;
-	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-	overflow: hidden;
-	z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  /* overflow: hidden; */
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 #songInfo {
-	background: rgba(0, 0, 0, 0.5);
-	opacity: 0.9;
-	position: relative;
-	border-radius: var(--corner-radius);
-	padding: 0px 20px;
-	height: 100%;
-	overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--corner-radius);
+  padding: 10px 15px;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 5px;
 }
 
-#IAmRunningOutOfNamesForTheseBoxes {
-	position: absolute;
-	width: calc(100% - 40px);
-	position: absolute;
-	top: 50%;
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
-}
-
-#backgroundArt {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	border-radius: var(--corner-radius);
-	overflow: hidden;
-	z-index: -1;
-	opacity: 0.9;
-}
-
-#backgroundImage {
-	filter: blur(20px);
-	position: absolute;
-	width: 140%;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-}
-
-#backgroundImageBack {
-	filter: blur(20px);
-	position: absolute;
-	width: 140%;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-	z-index: -1;
+/* =========================================================
+   TEXT / LABEL STYLING
+========================================================= */
+#songLabel {
+  font-weight: bold;
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.5s ease;
 }
 
 #artistLabel {
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 1;
-	white-space: nowrap;
-	transition: all 0.5s ease;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  transition: all 0.5s ease;
+  color: #ddd;
 }
 
-#songLabel {
-	font-weight: bold;
-	font-size: 20px;	
-	width: calc(100%);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	transition: all 0.5s ease;
+/* =========================================================
+   PROGRESS BAR / TIME DISPLAY
+========================================================= */
+#progressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12px;
+  color: #b3b3b3;
+  margin-top: 15px;
 }
 
 #progressBg {
-	margin-top: 15px;
-	width: 100%;
-	height: auto;
-	border-radius: 5px;
-	background-color: #1F1F1F;
+  flex: 1;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #1F1F1F;
+  overflow: hidden;
 }
 
 #progressBar {
-	border-radius: 5px;
-	height: 5px;
-	width: 20%;
-	background-color: #ffffff;
-	margin: 10px 0px;
-	transition: all 1s ease;
+  height: 100%;
+  width: 20%;
+  background-color: #ffffff;
+  border-radius: 5px;
+  transition: width 1s ease;
 }
 
-#times {
-	position: relative;
-	height: 16px;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 2.2;
+/* =========================================================
+   BACKGROUND LAYER (OPTIONAL)
+========================================================= */
+#backgroundArt {
+  display: none; /* optional visual blur layer - disabled for performance */
 }
 
-#progressTime {
-	position: absolute;
-}
-
-#timeRemaining {
-	position: absolute;
-	width: 100%;
-	text-align: right;
-}
-
+/* =========================================================
+   TEXT FADE STATES
+========================================================= */
 .text-show {
-	opacity: 1;
-	transition: all 0.25s ease;
+  opacity: 1;
+  transition: opacity 0.25s ease;
 }
 
 .text-fade {
-	opacity: 0;
-	transition: all 0.25s ease;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
